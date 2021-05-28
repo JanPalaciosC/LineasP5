@@ -26,18 +26,35 @@ function draw(){
     ecuPP(0, 125, 250, 125);
     ecuPP(0, 0, 250, 250);
     ecuPP(0, 250, 250, 0);
+    textSize(32);
+    text('ecuPP', 10, 300);
+
 
     stroke("blue");
     DDA(375, 0, 375, 250);
     DDA(250, 125, 500, 125);
     DDA(250, 0, 500, 250);
     DDA(250, 250, 500, 0);
+    textSize(32);
+    text('DDA', 300, 300);
+
 
     stroke("green");
     Bresenham(625, 0, 625, 250);
     Bresenham(500, 125, 750, 125);
     Bresenham(500, 0, 750, 250);
     Bresenham(500, 250, 750, 0);
+    textSize(32);
+    text('Bresenham', 500, 300);
+
+    stroke("purple");
+    elipse(1000,250, 150, 200); 
+    textSize(32);
+    text('Elipse', 950, 500);
+
+    circulo(300, 400, 40);
+    textSize(32);
+    text('Ciruclo', 250, 500);
 
     
     
@@ -132,5 +149,59 @@ function Bresenham(x1, y1, x2, y2){
         }
       }
   }
+
+
+  function elipse(x1, y1, x2, y2){
+
+    let x, y, p;
+    x = -1;
+    y = y2;
+    p = Math.round((y2*2) - (x2*2)*y2 + 0.25*(x2*2));
+    y --;
+
+      while (y > 0) {
+
+        if (p > 0){
+          y --;
+        } else if (p < 0) {
+          x ++;
+        }
+
+        p = Math.round((y2*y2)*(x*x) + (x2*x2)*(y*y) - (x2*x2)*(y2*y2))+1;
+        
+        point(x1 + x, y1 + y);
+        point(x1 + x, y1 - y);
+        point(x1 - x, y1 + y);
+        point(x1 - x, y1 - y);
+        
+      }
+  
+  }
+
+  function circulo( x1, y1, r) {
+
+      let x = -1;
+      let y = r;
+      let p = Math.round(5/4 - r);
+
+        while (x < y) {
+          x++;
+          if (p < 0) {
+            p = p + 2 * x + 1;
+          } else {
+            y --;
+            p = p + 2 * (x - y) + 1;
+          }
+
+          point(x1 + x, y1 + y);
+          point(x1 + x, y1 - y);
+          point(x1 - x, y1 + y);
+          point(x1 - x, y1 - y);
+          point(x1 + y, y1 + x);
+          point(x1 + y, y1 - x);
+          point(x1 - y, y1 + x);
+          point(x1 - y, y1 - x);
+        }
+  }  
     
     
